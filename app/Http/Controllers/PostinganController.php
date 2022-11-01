@@ -19,6 +19,18 @@ class PostinganController extends Controller
 
   public function simpan(Request $request)
   {
+    $request->validate([
+      'id_post' => 'required',
+      'judul' => 'required|min:20|max:50',
+      'isi' => 'required',
+      'tgl_post' => 'required',
+  ], [
+    'id_post.required' => 'ID Tidak Boleh Kosong!!',
+    'judul.required' => 'Judul Tidak Boleh Kosong!!',
+    'isi.required' => 'Isi Tidak Boleh Kosong!!',
+    'tgl_post.required' => 'Tgl Tidak Boleh Kosong!!'
+  ]);
+  
     $simpan = Postingan::create([
       'id_post' => $request->id_post,
       'judul' => $request->judul,
@@ -36,6 +48,13 @@ class PostinganController extends Controller
   
   public function update($id,  Request $request)
   {
+    $request->validate([
+      'id_post' => 'required',
+      'judul' => 'required|min:20|max:50',
+      'isi' => 'required',
+      'tgl_post' => 'required',
+  ]);
+  
     $postingan = Postingan::find($id);
     $postingan->update( $request->except('_token','_method'));
     return redirect('postingan');

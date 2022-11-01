@@ -29,6 +29,13 @@ class KategoriController extends Controller
 
   public function simpan(Request $request)
   {
+    $request->validate([
+      'id_kategori' => 'required',
+      'nama_kategori' => 'required',
+  ], [
+    'id_kategori.required' => 'ID Kategori Tidak Boleh Kosong!!',
+    'nama_kategori.required' => 'Nama Kategori Tidak Boleh Kosong!!'
+  ]);
     $simpan = Kategori::create([
       'id_kategori' => $request->id_kategori,
       'nama_kategori' => $request->nama_kategori
@@ -44,6 +51,10 @@ class KategoriController extends Controller
   
   public function update($id,  Request $request)
   {
+    $request->validate([
+      'id_kategori' => 'required',
+      'nama_kategori' => 'required',
+  ]);
     $kategori = Kategori::find($id);
     $kategori->update( $request->except('_token','_method'));
     return redirect('kategori');

@@ -25,6 +25,15 @@ class KomentarController extends Controller
 
   public function simpan(Request $request)
   {
+    $request->validate([
+      'nama' => 'required',
+      'judul_artikel' => 'required',
+      'komentar' => 'required',
+  ], [
+    'nama.required' => 'Nama Tidak Boleh Kosong!!',
+    'judul_artikel.required' => 'Judul Artikel Tidak Boleh Kosong!!',
+    'komentar.required' => 'Komentar Tidak Boleh Kosong!!'
+  ]);
     $simpan = Komentar::create([
       'nama' => $request->nama,
       'komentar' => $request->komentar
@@ -40,6 +49,11 @@ class KomentarController extends Controller
   
   public function update($id,  Request $request)
   {
+    $request->validate([
+      'nama' => 'required',
+      'judul_artikel' => 'required',
+      'komentar' => 'required',
+  ]);
     $komentar = Komentar::find($id);
     $komentar->update( $request->except('_token','_method'));
     return redirect('komentar');

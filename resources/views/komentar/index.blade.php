@@ -2,8 +2,6 @@
 @section('content')
 <h4>Halaman Komentar</h4>
 <button type="button" class="btn btn-primary"><a href="/komentar/tambah" class="text-dark">Tambah</a></button>
-<table class="table table-hover">
-  <thead>
     <tr>
       <th scope="col">Nama</th>
       <th scope="col">Judul Artikel</th>
@@ -23,6 +21,5 @@
      </td>
     </tr>
     @endforeach
-  </tbody>
-</table> 
+ 
 @endsection
